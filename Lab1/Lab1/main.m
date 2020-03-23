@@ -30,8 +30,8 @@ int main(int argc, const char * argv[]) {
             NSString *strInput = getUserInput(255, @"\nEnter your String: ('q' to quit)");
             if ([strInput isEqualToString:@"q"]) { break; }
             while (YES) {
-                NSString *option = getUserInput(10, @"\nChoose one of the following options:\n1. Uppercase\n2. Lowercase\n3. Numberize\n4. Canadianize\n5. Respond\n6. De-Space-It\n7. Done\n");
-                if ([option isEqualToString:@"7"]) { break; }
+                NSString *option = getUserInput(10, @"\nChoose one of the following options:\n1. Uppercase\n2. Lowercase\n3. Numberize\n4. Canadianize\n5. Respond\n6. De-Space-It\n7. Word Count\n8. Remove punctuations\n0. Done\n");
+                if ([option isEqualToString:@"0"]) { break; }
                 else if ([option isEqualToString:@"1"]) {
                     NSLog(@"%@", [strInput uppercaseString]);
                 } else if ([option isEqualToString:@"2"]) {
@@ -50,12 +50,17 @@ int main(int argc, const char * argv[]) {
                     NSLog(@"%@", [strInput stringByAppendingString:@", eh?"]);
                 } else if ([option isEqualToString:@"5"]) {
                     if ([strInput characterAtIndex:[strInput length] - 1] == '?') {
-                        NSLog(@"%@", @"I don't know");
+                        NSLog(@"%@", @"I don't know.");
                     } else if ([strInput characterAtIndex:[strInput length] - 1] == '!') {
                         NSLog(@"%@", @"Whoa, clam down!");
                     }
                 } else if ([option isEqualToString:@"6"]) {
                     NSLog(@"%@", [strInput stringByReplacingOccurrencesOfString:@" " withString:@"-"]);
+                } else if ([option isEqualToString:@"7"]) {
+                    NSLog(@"%ld", [strInput length]);
+                } else if ([option isEqualToString:@"8"]) {
+                    NSCharacterSet *punctuations = [NSCharacterSet characterSetWithCharactersInString:@":;.,!?"];
+                    NSLog(@"%@", [[strInput componentsSeparatedByCharactersInSet: punctuations] componentsJoinedByString: @""]);
                 }
             }
         }
