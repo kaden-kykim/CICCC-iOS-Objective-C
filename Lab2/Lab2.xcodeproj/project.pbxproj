@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6F486877242A9C3A00AFD28E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F486876242A9C3A00AFD28E /* main.m */; };
 		6F486880242AAD2C00AFD28E /* DateCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48687F242AAD2C00AFD28E /* DateCalculator.m */; };
+		6F486889242AC54A00AFD28E /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F486888242AC54A00AFD28E /* Box.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		6F486876242A9C3A00AFD28E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F48687E242AAD2C00AFD28E /* DateCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateCalculator.h; sourceTree = "<group>"; };
 		6F48687F242AAD2C00AFD28E /* DateCalculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateCalculator.m; sourceTree = "<group>"; };
+		6F486887242AC54A00AFD28E /* Box.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
+		6F486888242AC54A00AFD28E /* Box.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				6F486876242A9C3A00AFD28E /* main.m */,
 				6F48687E242AAD2C00AFD28E /* DateCalculator.h */,
 				6F48687F242AAD2C00AFD28E /* DateCalculator.m */,
+				6F486887242AC54A00AFD28E /* Box.h */,
+				6F486888242AC54A00AFD28E /* Box.m */,
 			);
 			path = Lab2;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F486889242AC54A00AFD28E /* Box.m in Sources */,
 				6F486877242A9C3A00AFD28E /* main.m in Sources */,
 				6F486880242AAD2C00AFD28E /* DateCalculator.m in Sources */,
 			);
