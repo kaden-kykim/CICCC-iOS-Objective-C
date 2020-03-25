@@ -21,7 +21,7 @@
 }
 
 -(float)getVolume {
-    return self.width * self.height * self.length;
+    return _width * _height * _length;
 }
 
 -(int)getNumberOfBoxesFitInTheOther:(Box *) theOther {
