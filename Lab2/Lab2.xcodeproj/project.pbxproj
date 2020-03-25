@@ -98,7 +98,7 @@
 		6F48686B242A9C3A00AFD28E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = CICCC;
 				TargetAttributes = {
 					6F486872242A9C3A00AFD28E = {
@@ -250,6 +250,7 @@
 		6F48687B242A9C3A00AFD28E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U2ZLLL9FT4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -260,6 +261,7 @@
 		6F48687C242A9C3A00AFD28E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U2ZLLL9FT4;
 				ENABLE_HARDENED_RUNTIME = YES;
