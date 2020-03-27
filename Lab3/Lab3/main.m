@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
             AdditionQuestion *addQuestion = [AdditionQuestion new];
             NSLog(@"%@", addQuestion.question);
             NSString *input = [InputHandler getUserInput:128];
-            if ([NSString isEqualTo:input]) {
+            if ([input isEqualTo:@"quit"]) {
                 gameOn = NO;
                 continue;
             }
