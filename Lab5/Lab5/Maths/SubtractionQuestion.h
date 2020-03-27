@@ -1,5 +1,5 @@
 //
-//  AdditionQuestion.h
+//  SubtractionQuestion.h
 //  Lab5
 //
 //  Created by Kaden Kim on 2020-03-26.
@@ -8,6 +8,6 @@
 
 #import "Question.h"
 
-@interface AdditionQuestion : Question
+@interface SubtractionQuestion : Question
 
 @end

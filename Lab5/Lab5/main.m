@@ -7,33 +7,42 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Maths/AdditionQuestion.h"
+#import "Maths/QuestionManager.h"
+#import "Maths/QuestionFactory.h"
 #import "Maths/InputHandler.h"
 #import "Maths/ScoreKeeper.h"
+#import "Maths/Question.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // Lab5: Maths - Part2
         NSLog(@"MATHS!");
         ScoreKeeper *scoreKeeper = [ScoreKeeper new];
+        QuestionManager *questionManager = [QuestionManager new];
+        QuestionFactory *questionFactory = [QuestionFactory new];
+
+        NSString *ansRight = @"Right!", *ansWrong = @"Wrong";
         BOOL gameOn = YES;
+        
         while (gameOn) {
-            AdditionQuestion *addQuestion = [AdditionQuestion new];
-            NSLog(@"%@", addQuestion.question);
+            Question *question = [questionFactory generateRandomQuestion];
+            [questionManager.questions addObject:question];
+            NSLog(@"%@", question.question);
             NSString *input = [InputHandler getUserInput:128];
-            if ([NSString isEqualTo:input]) {
+            if ([input isEqualTo:@"quit"]) {
                 gameOn = NO;
                 continue;
             }
             NSInteger ans = [input intValue];
-            if (addQuestion.answer == ans) {
-                NSLog(@"Right!");
+            if (question.answer == ans) {
+                NSLog(@"%@", ansRight);
                 scoreKeeper.right++;
             } else {
-                NSLog(@"Wrong!");
+                NSLog(@"%@", ansWrong);
                 scoreKeeper.wrong++;
             }
             NSLog(@"%@", [scoreKeeper outputScore]);
+            NSLog(@"%@", [questionManager timeOutput]);
         }
     }
     return 0;
