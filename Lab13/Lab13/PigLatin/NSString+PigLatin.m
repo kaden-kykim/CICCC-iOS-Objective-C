@@ -14,20 +14,9 @@
     NSCharacterSet *vowels = [NSCharacterSet characterSetWithCharactersInString:@"aeiou"];
     NSMutableArray *words = [[[self lowercaseString] componentsSeparatedByString:@" "] mutableCopy];
     for (int i = 0; i < [words count]; ++i) {
-        NSString *word = words[i];
-        if ([vowels characterIsMember:[word characterAtIndex:0]]) {
-            words[i] = [[word stringByAppendingString:@"ay"] capitalizedString];
-        } else {
-            NSArray *tokens = [word componentsSeparatedByCharactersInSet:vowels];
-            if ([tokens count] == 1) {
-                // (Perhaps) No rule for the word composed by only consonants
-                words[i] = [[word stringByAppendingString:@"ay"] capitalizedString];
-            } else {
-                words[i] = [[[[word substringFromIndex:[tokens[0] length]] stringByAppendingString:tokens[0]] stringByAppendingString:@"ay"] capitalizedString];
-            }
-        }
+        NSArray *tokens = [words[i] componentsSeparatedByCharactersInSet:vowels];
+        words[i] = ([vowels characterIsMember:[words[i] characterAtIndex:0]] || [tokens count] == 1) ? [[words[i] stringByAppendingString:@"ay"] capitalizedString] : [[[[words[i] substringFromIndex:[tokens[0] length]] stringByAppendingString:tokens[0]] stringByAppendingString:@"ay"] capitalizedString];
     }
-    
     return [words componentsJoinedByString:@" "];
 }
 
