@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, PizzaSize) {
     SMALL,
     MEDIUM,
     LARGE,
     UNDEFINED = NSUIntegerMax
-} PizzaSize;
+};
 
 @interface Pizza : NSObject
 
