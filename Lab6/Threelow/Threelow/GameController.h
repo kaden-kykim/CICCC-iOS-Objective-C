@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *dice;
 
 - (void)holdDice:(NSInteger)number;
+- (void)resetDice;
 - (void)randomizeUnheldDice;
 - (void)printAllDice;
 

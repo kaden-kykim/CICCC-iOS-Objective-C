@@ -10,7 +10,7 @@
 #import "GameController.h"
 
 void printInstructions() {
-    NSLog(@"\n%@\n%@", @"\'roll\'  to roll the dice", @"\'hold\'  to hold a dice");
+    NSLog(@"\n%@\n%@\n%@", @"\'roll\'  to roll the dice", @"\'hold\'  to hold a dice", @"\'reset\' to un-hold all dice");
 }
 
 NSString *getUserInput(NSString *prompt) {
@@ -39,7 +39,9 @@ int main(int argc, const char * argv[]) {
                         [gameCtrl printAllDice];
                     }
                 }
-                
+            } else if ([opt isEqualToString:@"reset"]) {
+                [gameCtrl resetDice];
+                [gameCtrl printAllDice];
             }
         }
     }

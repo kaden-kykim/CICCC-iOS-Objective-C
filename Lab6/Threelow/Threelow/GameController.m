@@ -26,6 +26,11 @@
     [self.dice[number - 1] toggleHeldStatus];
 }
 
+- (void)resetDice {
+    for (Dice *die in self.dice)
+        die.isHeld = false;
+}
+
 - (void)randomizeUnheldDice {
     for (Dice *die in self.dice)
         if (!die.isHeld)
