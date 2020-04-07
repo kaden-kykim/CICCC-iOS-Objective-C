@@ -35,4 +35,8 @@
     }
 }
 
+- (void)toggleHeldStatus {
+    self.isHeld = !self.isHeld;
+}
+
 @end

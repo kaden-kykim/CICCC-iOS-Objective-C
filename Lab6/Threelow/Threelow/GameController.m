@@ -23,8 +23,7 @@
 }
 
 - (void)holdDice:(NSInteger)number {
-    Dice *die = self.dice[number - 1];
-    die.isHeld = !die.isHeld;
+    [self.dice[number - 1] toggleHeldStatus];
 }
 
 - (void)randomizeUnheldDice {
