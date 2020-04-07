@@ -21,13 +21,32 @@ void printAllDice(NSArray *allDice) {
     NSLog(@"%@", printStr);
 }
 
+void printInstructions() {
+    NSLog(@"\n%@", @"\'roll\'  to roll the dice");
+}
+
+NSString *getUserInput(NSString *prompt) {
+    if (prompt == NULL) printInstructions();
+    else NSLog(@"%@", prompt);
+    char buf[255];
+    char *input = fgets(buf, 255, stdin);
+    if (input != NULL) return [[NSString stringWithUTF8String:input] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return NULL;
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSMutableArray *dice = [[NSMutableArray alloc] init];
         for (int i = 0; i < 5; ++i)
             [dice addObject:[Dice new]];
-        randomizeAllDice(dice);
-        printAllDice(dice);
+        
+        while (YES) {
+            NSString *opt = getUserInput(NULL);
+            if ([opt isEqualToString:@"roll"]) {
+                randomizeAllDice(dice);
+                printAllDice(dice);
+            }
+        }
     }
     return 0;
 }
