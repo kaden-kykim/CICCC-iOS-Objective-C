@@ -7,22 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Dice.h"
-
-void randomizeAllDice(NSArray *allDice) {
-    for (Dice *dice in allDice)
-        [dice randomizeValue];
-}
-
-void printAllDice(NSArray *allDice) {
-    NSString *printStr = @"";
-    for (Dice *dice in allDice)
-        printStr = [printStr stringByAppendingFormat:@"%@ ", [dice getUniValue]];
-    NSLog(@"%@", printStr);
-}
+#import "GameController.h"
 
 void printInstructions() {
-    NSLog(@"\n%@", @"\'roll\'  to roll the dice");
+    NSLog(@"\n%@\n%@", @"\'roll\'  to roll the dice", @"\'hold\'  to hold a dice");
 }
 
 NSString *getUserInput(NSString *prompt) {
@@ -36,15 +24,22 @@ NSString *getUserInput(NSString *prompt) {
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        NSMutableArray *dice = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 5; ++i)
-            [dice addObject:[Dice new]];
-        
+        GameController *gameCtrl = [GameController new];
         while (YES) {
             NSString *opt = getUserInput(NULL);
             if ([opt isEqualToString:@"roll"]) {
-                randomizeAllDice(dice);
-                printAllDice(dice);
+                [gameCtrl randomizeUnheldDice];
+                [gameCtrl printAllDice];
+            } else if ([opt isEqualToString:@"hold"]) {
+                NSNumber *holdNum = [[NSNumberFormatter new] numberFromString:getUserInput(@"Enter the number of the die:")];
+                if (holdNum != nil) {
+                    NSInteger holdOpt = [holdNum integerValue];
+                    if (holdOpt >= 1 && holdOpt <= 6) {
+                        [gameCtrl holdDice:holdOpt];
+                        [gameCtrl printAllDice];
+                    }
+                }
+                
             }
         }
     }

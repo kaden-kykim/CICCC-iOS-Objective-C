@@ -10,6 +10,15 @@
 
 @implementation Dice
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _isHeld = false;
+    }
+    return self;
+}
+
 - (void)randomizeValue {
     self.value = arc4random_uniform(5) + 1;
 }
