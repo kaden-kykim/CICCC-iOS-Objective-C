@@ -8,15 +8,23 @@
 
 #import "GameController.h"
 
+const NSInteger COUNT = 5;
+
+@interface GameController()
+
+@property (nonatomic, readonly, strong) NSArray *dice;
+@property (nonatomic, strong) NSMutableSet *heldDice;
+
+@end
+
 @implementation GameController
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _COUNT = 5;
         NSMutableArray *tmpDice = [NSMutableArray new];
-        for (int i = 0; i < _COUNT; ++i)
+        for (int i = 0; i < COUNT; ++i)
             [tmpDice addObject:[Dice new]];
         _dice = tmpDice;
         _heldDice = [NSMutableSet new];
