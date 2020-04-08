@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "PaymentGateway.h"
+#import "PaypalPaymentService.h"
+#import "StripePaymentService.h"
+#import "AmazonPaymentService.h"
 
 NSString *userInput() {
     char buf[256];
@@ -19,11 +23,12 @@ int main(int argc, const char * argv[]) {
         NSInteger amount = arc4random_uniform(901) + 100;
         NSLog(@"Thank you for shopping at Acme.com.");
         NSLog(@"Your total is $%ld", amount);
+        int inputPayment = 0;
         while (YES) {
             NSLog(@"Please select your payment method: 1. Paypal, 2. Stripe, 3. Amazon");
-            int inputNum = [[[NSNumberFormatter new] numberFromString:userInput()] intValue];
-            if (inputNum > 0 && inputNum <= 3) {
-                NSLog(@"You selected %d", inputNum);
+            inputPayment = [[[NSNumberFormatter new] numberFromString:userInput()] intValue];
+            if (inputPayment > 0 && inputPayment <= 3) {
+                NSLog(@"You selected %d", inputPayment);
                 break;
             } else {
                 NSLog(@"Please input again.");
@@ -31,6 +36,17 @@ int main(int argc, const char * argv[]) {
         }
         
         PaymentGateway *pg = [PaymentGateway new];
+        PaypalPaymentService *paypalPS = [PaypalPaymentService new];
+        StripePaymentService *stripePS = [StripePaymentService new];
+        AmazonPaymentService *amazonPS = [AmazonPaymentService new];
+        
+        switch (inputPayment) {
+            case 1: pg.paymentDelegate = paypalPS; break;
+            case 2: pg.paymentDelegate = stripePS; break;
+            case 3: pg.paymentDelegate = amazonPS; break;
+            default: break;
+        }
+        
         [pg processPaymentAmount:amount];
     }
     return 0;
