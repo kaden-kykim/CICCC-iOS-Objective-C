@@ -13,6 +13,7 @@ const NSInteger COUNT = 5;
 @interface GameController()
 
 @property (nonatomic, readonly, strong) NSArray *dice;
+@property (nonatomic, strong) NSSet *compHeldDice;
 @property (nonatomic, strong) NSMutableSet *heldDice;
 @property (nonatomic, assign) NSInteger remainingRolls;
 
@@ -52,13 +53,16 @@ const NSInteger COUNT = 5;
 
 - (void)randomizeUnheldDice {
     if (_remainingRolls > 0) {
-        if ([_heldDice count] == COUNT) {
+        if ([_heldDice isEqualToSet:_compHeldDice]) {
+            NSLog(@"Must select(hold/unhold) at least one die.");
+        } else if ([_heldDice count] == COUNT) {
             NSLog(@"All dice are held.");
         } else {
             for (Dice *die in _dice)
                 if (![_heldDice containsObject:die])
                     [die randomizeValue];
             _remainingRolls--;
+            _compHeldDice = [_heldDice copy];
         }
     }
     if (_remainingRolls == 0) {
