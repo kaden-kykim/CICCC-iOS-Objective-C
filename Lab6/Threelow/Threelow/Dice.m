@@ -15,7 +15,6 @@
     self = [super init];
     if (self) {
         _value = [Dice generateRandomNumber];
-        _isHeld = false;
     }
     return self;
 }
@@ -30,18 +29,14 @@
 
 - (NSString *)getUniValue {
     switch (self.value) {
-        case 1: return (_isHeld) ? @"[⚀]" : @" ⚀ ";
-        case 2: return (_isHeld) ? @"[⚁]" : @" ⚁ ";
-        case 3: return (_isHeld) ? @"[⚂]" : @" ⚂ ";
-        case 4: return (_isHeld) ? @"[⚃]" : @" ⚃ ";
-        case 5: return (_isHeld) ? @"[⚄]" : @" ⚄ ";
-        case 6: return (_isHeld) ? @"[⚅]" : @" ⚅ ";
+        case 1: return @"⚀";
+        case 2: return @"⚁";
+        case 3: return @"⚂";
+        case 4: return @"⚃";
+        case 5: return @"⚄";
+        case 6: return @"⚅";
         default: return @"";
     }
-}
-
-- (void)toggleHeldStatus {
-    self.isHeld = !self.isHeld;
 }
 
 @end

@@ -14,9 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GameController : NSObject
 
 @property (nonatomic, readonly, assign) NSInteger COUNT;
-@property (nonatomic, strong) NSMutableArray *dice;
+@property (nonatomic, readonly, strong) NSArray *dice;
+@property (nonatomic, strong) NSMutableSet *heldDice;
 
-- (void)holdDice:(NSInteger)number;
+- (void)holdDie:(NSInteger)number;
 - (void)resetDice;
 - (void)randomizeUnheldDice;
 - (void)printAllDice;

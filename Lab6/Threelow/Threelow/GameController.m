@@ -15,32 +15,34 @@
     self = [super init];
     if (self) {
         _COUNT = 5;
-        _dice = [NSMutableArray new];        
+        NSMutableArray *tmpDice = [NSMutableArray new];
         for (int i = 0; i < _COUNT; ++i)
-            [_dice addObject:[Dice new]];
+            [tmpDice addObject:[Dice new]];
+        _dice = tmpDice;
+        _heldDice = [NSMutableSet new];
     }
     return self;
 }
 
-- (void)holdDice:(NSInteger)number {
-    [_dice[number - 1] toggleHeldStatus];
+- (void)holdDie:(NSInteger)number {
+    Dice *selDie = _dice[number - 1];
+    ([_heldDice containsObject:selDie]) ? [_heldDice removeObject:selDie] : [_heldDice addObject:selDie];
 }
 
 - (void)resetDice {
-    for (Dice *die in _dice)
-        die.isHeld = false;
+    [_heldDice removeAllObjects];
 }
 
 - (void)randomizeUnheldDice {
     for (Dice *die in _dice)
-        if (!die.isHeld)
+        if ([_heldDice containsObject:die])
             [die randomizeValue];
 }
 
 - (NSInteger)getCurrentScore {
     NSInteger curScore = 0;
-    for (Dice *die in _dice)
-        if (die.isHeld) curScore += die.value;
+    for (Dice *die in _heldDice)
+        curScore += die.value;
     return curScore;
 }
 
@@ -49,7 +51,7 @@
     NSLog(@"-- Current  Dice --");
     NSString *printStr = @"";
     for (Dice *die in _dice)
-        printStr = [printStr stringByAppendingFormat:@"%@ ", [die getUniValue]];
+        printStr = [printStr stringByAppendingFormat:([_heldDice containsObject:die]) ? @"[%@] " : @" %@  ", [die getUniValue]];
     NSLog(@"%@", printStr);
     NSLog(@"");
     NSLog(@"--  Total Score  --");

@@ -13,11 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Dice : NSObject
 
 @property (nonatomic, assign) NSInteger value;
-@property (nonatomic, assign) BOOL isHeld;
 
 - (void)randomizeValue;
 - (NSString *)getUniValue;
-- (void)toggleHeldStatus;
 
 @end
 

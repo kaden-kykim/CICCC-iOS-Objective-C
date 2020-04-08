@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
                 if (holdNum != nil) {
                     NSInteger holdOpt = [holdNum integerValue];
                     if (holdOpt >= 1 && holdOpt <= 6) {
-                        [gameCtrl holdDice:holdOpt];
+                        [gameCtrl holdDie:holdOpt];
                         [gameCtrl printAllDice];
                     }
                 }
