@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 - (void)processPaymentAmount:(NSInteger)amount;
+- (BOOL)canProcessPayment;
 
 @end
 

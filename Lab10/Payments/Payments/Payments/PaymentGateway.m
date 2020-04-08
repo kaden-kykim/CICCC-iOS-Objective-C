@@ -11,7 +11,11 @@
 @implementation PaymentGateway
 
 - (void)processPaymentAmount:(NSInteger)amount {
-    [self.paymentDelegate processPaymentAmount:amount];
+    if ([self.paymentDelegate canProcessPayment]) {
+        [self.paymentDelegate processPaymentAmount:amount];
+    } else {
+        NSLog(@"The payment system is not available at this moment. We apologize for any inconvenient");
+    }
 }
 
 @end

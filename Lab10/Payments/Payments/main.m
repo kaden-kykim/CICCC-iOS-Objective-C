@@ -21,11 +21,12 @@ NSString *userInput() {
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSInteger amount = arc4random_uniform(901) + 100;
-        NSLog(@"Thank you for shopping at Acme.com.");
+        NSLog(@"Thank you for shopping @Acme.com.");
         NSLog(@"Your total is $%ld", amount);
         int inputPayment = 0;
         while (YES) {
-            NSLog(@"Please select your payment method: 1. Paypal, 2. Stripe, 3. Amazon");
+            NSLog(@"Please select your payment method");
+            NSLog(@"1. Paypal, 2. Stripe, 3. Amazon");
             inputPayment = [[[NSNumberFormatter new] numberFromString:userInput()] intValue];
             if (inputPayment > 0 && inputPayment <= 3) {
                 NSLog(@"You selected %d", inputPayment);
