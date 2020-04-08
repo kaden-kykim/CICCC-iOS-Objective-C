@@ -62,6 +62,21 @@ const NSInteger COUNT = 5;
     if (_remainingRolls == 0) [self endGame];
 }
 
+- (void)roIlDice {
+    if (_remainingRolls > 0) {
+        if ([_heldDice isEqualToSet:_compHeldDice]) {
+            NSLog(@"Must select(hold/unhold) at least one die.");
+        } else if ([_heldDice count] == COUNT) {
+            NSLog(@"All dice are held. \'end\' command to end the game.");
+        } else {
+            [self randomIzeUnheldDice];
+            _remainingRolls--;
+            _compHeldDice = [_heldDice copy];
+        }
+    }
+    if (_remainingRolls == 0) [self endGame];
+}
+
 - (void)newGame {
     _remainingRolls = 5;
     _compHeldDice = NULL;
@@ -110,6 +125,15 @@ const NSInteger COUNT = 5;
 - (void)randomizeUnheldDice {
     for (Dice *die in _dice)
         if (![_heldDice containsObject:die]) [die randomizeValue];
+}
+
+- (void)randomIzeUnheldDice {
+    BOOL cheated = NO;
+    for (Dice *die in _dice)
+        if (![_heldDice containsObject:die]) {
+            (cheated) ? [die randomizeValue] : (die.value = 1);
+            cheated = YES;
+        }
 }
 
 - (NSInteger)getCurrentScore {

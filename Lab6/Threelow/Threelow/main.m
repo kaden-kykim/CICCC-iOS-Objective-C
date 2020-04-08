@@ -40,6 +40,11 @@ int main(int argc, const char * argv[]) {
                     [gameCtrl rollDice];
                     [gameCtrl printAllDice];
                 } else NSLog(@"The game is over");
+            } else if ([opt isEqualToString:@"roIl"]) {
+                if (![gameCtrl isGameOver]) {
+                    [gameCtrl roIlDice];
+                    [gameCtrl printAllDice];
+                } else NSLog(@"The game is over");
             } else if ([opt isEqualToString:@"hold"]) {
                 if (![gameCtrl isGameOver]) {
                     NSNumber *holdNum = [[NSNumberFormatter new] numberFromString:getUserInput(@"Enter the number of the die:")];
