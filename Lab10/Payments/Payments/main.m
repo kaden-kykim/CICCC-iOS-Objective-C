@@ -12,6 +12,9 @@
 #import "PaypalPaymentService.h"
 #import "StripePaymentService.h"
 #import "AmazonPaymentService.h"
+#import "ApplePaymentService.h"
+
+const NSInteger NUM_PAYMENT_SERVICE = 4;
 
 NSString *userInput() {
     char buf[256];
@@ -26,9 +29,9 @@ int main(int argc, const char * argv[]) {
         int inputPayment = 0;
         while (YES) {
             NSLog(@"Please select your payment method");
-            NSLog(@"1. Paypal, 2. Stripe, 3. Amazon");
+            NSLog(@"1. Paypal, 2. Stripe, 3. Amazon, 4. Apple");
             inputPayment = [[[NSNumberFormatter new] numberFromString:userInput()] intValue];
-            if (inputPayment > 0 && inputPayment <= 3) {
+            if (inputPayment > 0 && inputPayment <= NUM_PAYMENT_SERVICE) {
                 NSLog(@"You selected %d", inputPayment);
                 break;
             } else {
@@ -40,11 +43,13 @@ int main(int argc, const char * argv[]) {
         PaypalPaymentService *paypalPS = [PaypalPaymentService new];
         StripePaymentService *stripePS = [StripePaymentService new];
         AmazonPaymentService *amazonPS = [AmazonPaymentService new];
+        ApplePaymentService *applePS = [ApplePaymentService new];
         
         switch (inputPayment) {
             case 1: pg.paymentDelegate = paypalPS; break;
             case 2: pg.paymentDelegate = stripePS; break;
             case 3: pg.paymentDelegate = amazonPS; break;
+            case 4: pg.paymentDelegate = applePS; break;
             default: break;
         }
         

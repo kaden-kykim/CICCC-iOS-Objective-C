@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F6E80A0243E77EC004C7D7B /* ApplePaymentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E809F243E77EC004C7D7B /* ApplePaymentService.m */; };
 		6FAAFE83243E68D6000B5200 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAFE82243E68D6000B5200 /* main.m */; };
 		6FAAFE8B243E6DB8000B5200 /* PaymentGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAFE8A243E6DB8000B5200 /* PaymentGateway.m */; };
 		6FAAFE8F243E6F92000B5200 /* PaypalPaymentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAFE8E243E6F92000B5200 /* PaypalPaymentService.m */; };
@@ -27,6 +28,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F6E809E243E77EC004C7D7B /* ApplePaymentService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplePaymentService.h; sourceTree = "<group>"; };
+		6F6E809F243E77EC004C7D7B /* ApplePaymentService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplePaymentService.m; sourceTree = "<group>"; };
 		6FAAFE7F243E68D6000B5200 /* Payments */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Payments; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FAAFE82243E68D6000B5200 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FAAFE89243E6DB8000B5200 /* PaymentGateway.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentGateway.h; sourceTree = "<group>"; };
@@ -86,6 +89,8 @@
 				6FAAFE91243E6FA1000B5200 /* StripePaymentService.m */,
 				6FAAFE93243E6FB0000B5200 /* AmazonPaymentService.h */,
 				6FAAFE94243E6FB0000B5200 /* AmazonPaymentService.m */,
+				6F6E809E243E77EC004C7D7B /* ApplePaymentService.h */,
+				6F6E809F243E77EC004C7D7B /* ApplePaymentService.m */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 				6FAAFE83243E68D6000B5200 /* main.m in Sources */,
 				6FAAFE95243E6FB0000B5200 /* AmazonPaymentService.m in Sources */,
 				6FAAFE8B243E6DB8000B5200 /* PaymentGateway.m in Sources */,
+				6F6E80A0243E77EC004C7D7B /* ApplePaymentService.m in Sources */,
 				6FAAFE8F243E6F92000B5200 /* PaypalPaymentService.m in Sources */,
 				6FAAFE92243E6FA1000B5200 /* StripePaymentService.m in Sources */,
 			);
