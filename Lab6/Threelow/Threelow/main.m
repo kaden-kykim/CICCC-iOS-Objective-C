@@ -15,7 +15,7 @@ void printInstructions() {
           @"\'hold\'  to hold a dice",
           @"\'reset\' to un-hold all dice",
           @"\'disp\'  to show current stats",
-          @"\'done\'  to end the game");
+          @"\'done\'  to exit the game");
 }
 
 NSString *getUserInput(NSString *prompt) {

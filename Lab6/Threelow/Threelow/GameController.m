@@ -14,6 +14,7 @@ const NSInteger COUNT = 5;
 
 @property (nonatomic, readonly, strong) NSArray *dice;
 @property (nonatomic, strong) NSMutableSet *heldDice;
+@property (nonatomic, assign) NSInteger remainingRolls;
 
 @end
 
@@ -28,13 +29,21 @@ const NSInteger COUNT = 5;
             [tmpDice addObject:[Dice new]];
         _dice = tmpDice;
         _heldDice = [NSMutableSet new];
+        _remainingRolls = COUNT;
     }
     return self;
 }
 
 - (void)holdDie:(NSInteger)number {
-    Dice *selDie = _dice[number - 1];
-    ([_heldDice containsObject:selDie]) ? [_heldDice removeObject:selDie] : [_heldDice addObject:selDie];
+    if (_remainingRolls > 0) {
+        Dice *selDie = _dice[number - 1];
+        ([_heldDice containsObject:selDie]) ? [_heldDice removeObject:selDie] : [_heldDice addObject:selDie];
+    }    
+}
+
+- (void)holdAllDice {
+    [self resetDice];
+    [_heldDice addObjectsFromArray:_dice];
 }
 
 - (void)resetDice {
@@ -42,9 +51,20 @@ const NSInteger COUNT = 5;
 }
 
 - (void)randomizeUnheldDice {
-    for (Dice *die in _dice)
-        if ([_heldDice containsObject:die])
-            [die randomizeValue];
+    if (_remainingRolls > 0) {
+        if ([_heldDice count] == COUNT) {
+            NSLog(@"All dice are held.");
+        } else {
+            for (Dice *die in _dice)
+                if (![_heldDice containsObject:die])
+                    [die randomizeValue];
+            _remainingRolls--;
+        }
+    }
+    if (_remainingRolls == 0) {
+        [self holdAllDice];
+        _remainingRolls--;
+    }
 }
 
 - (NSInteger)getCurrentScore {
@@ -65,6 +85,12 @@ const NSInteger COUNT = 5;
     NSLog(@"--  Total Score  --");
     NSLog(@"    Score : %ld", [self getCurrentScore]);
     NSLog(@"===================");
+    NSLog(@"Remaining Rolls : %ld", MAX(_remainingRolls, 0));
+    NSLog(@"===================");
+    if (_remainingRolls <= 0) {
+        NSLog(@" G A M E   O V E R");
+        NSLog(@"===================");
+    }
 }
 
 @end
