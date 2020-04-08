@@ -10,11 +10,13 @@
 #import "GameController.h"
 
 void printInstructions() {
-    NSLog(@"\n%@\n%@\n%@\n%@\n%@",
+    NSLog(@"\n%@\n%@\n%@\n%@\n%@\n%@\n%@",
           @"\'roll\'  to roll the dice",
           @"\'hold\'  to hold a dice",
           @"\'reset\' to un-hold all dice",
           @"\'disp\'  to show current stats",
+          @"\'new\'   to start new game",
+          @"\'end\'   to end the game",
           @"\'done\'  to exit the game");
 }
 
@@ -30,15 +32,14 @@ NSString *getUserInput(NSString *prompt) {
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         GameController *gameCtrl = [GameController new];
+        [gameCtrl printAllDice];
         while (YES) {
             NSString *opt = getUserInput(NULL);
             if ([opt isEqualToString:@"roll"]) {
                 if (![gameCtrl isGameOver]) {
-                    [gameCtrl randomizeUnheldDice];
+                    [gameCtrl rollDice];
                     [gameCtrl printAllDice];
-                } else {
-                    NSLog(@"The game is over");
-                }
+                } else NSLog(@"The game is over");
             } else if ([opt isEqualToString:@"hold"]) {
                 if (![gameCtrl isGameOver]) {
                     NSNumber *holdNum = [[NSNumberFormatter new] numberFromString:getUserInput(@"Enter the number of the die:")];
@@ -49,17 +50,21 @@ int main(int argc, const char * argv[]) {
                             [gameCtrl printAllDice];
                         }
                     }
-                } else {
-                    NSLog(@"The game is over");
-                }
+                } else NSLog(@"The game is over");
             } else if ([opt isEqualToString:@"reset"]) {
                 if (![gameCtrl isGameOver]) {
                     [gameCtrl resetDice];
                     [gameCtrl printAllDice];
-                } else {
-                    NSLog(@"The game is over");
-                }
+                } else NSLog(@"The game is over");
             } else if ([opt isEqualToString:@"disp"]) {
+                [gameCtrl printAllDice];
+            } else if ([opt isEqualToString:@"new"]) {
+                [gameCtrl newGame];
+                [gameCtrl printAllDice];
+            } else if ([opt isEqualToString:@"end"]) {
+                if (![gameCtrl isGameOver]) {
+                    [gameCtrl endGame];
+                }
                 [gameCtrl printAllDice];
             } else if ([opt isEqualToString:@"done"]) {
                 break;

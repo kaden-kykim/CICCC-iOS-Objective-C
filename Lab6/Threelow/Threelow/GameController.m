@@ -40,30 +40,21 @@ const NSInteger COUNT = 5;
     if (_remainingRolls > 0) {
         Dice *selDie = _dice[number - 1];
         ([_heldDice containsObject:selDie]) ? [_heldDice removeObject:selDie] : [_heldDice addObject:selDie];
-    }    
-}
-
-- (void)holdAllDice {
-    [self resetDice];
-    [_heldDice addObjectsFromArray:_dice];
-}
-
-- (void)resetDice {
-    if (_remainingRolls > 0) {
-        [_heldDice removeAllObjects];
     }
 }
 
-- (void)randomizeUnheldDice {
+- (void)resetDice {
+    if (_remainingRolls > 0) [_heldDice removeAllObjects];
+}
+
+- (void)rollDice {
     if (_remainingRolls > 0) {
         if ([_heldDice isEqualToSet:_compHeldDice]) {
             NSLog(@"Must select(hold/unhold) at least one die.");
         } else if ([_heldDice count] == COUNT) {
-            NSLog(@"All dice are held.");
+            NSLog(@"All dice are held. \'end\' command to end the game.");
         } else {
-            for (Dice *die in _dice)
-                if (![_heldDice containsObject:die])
-                    [die randomizeValue];
+            [self randomizeUnheldDice];
             _remainingRolls--;
             _compHeldDice = [_heldDice copy];
         }
@@ -71,25 +62,24 @@ const NSInteger COUNT = 5;
     if (_remainingRolls == 0) [self endGame];
 }
 
-- (BOOL)isGameOver {
-    return (_remainingRolls <= 0);
+- (void)newGame {
+    _remainingRolls = 5;
+    _compHeldDice = NULL;
+    [self resetDice];
+    [self randomizeUnheldDice];
 }
 
 - (void)endGame {
     [self holdAllDice];
     _remainingRolls = -1;
-    
     if ([self getCurrentScore] < _scoreToBeat) {
         _scoreToBeat = [self getCurrentScore];
         NSLog(@"!!! New  Record !!!");
     }
 }
 
-- (NSInteger)getCurrentScore {
-    NSInteger curScore = 0;
-    for (Dice *die in _heldDice)
-        curScore += die.value;
-    return curScore;
+- (BOOL)isGameOver {
+    return (_remainingRolls <= 0);
 }
 
 - (void)printAllDice {
@@ -110,6 +100,23 @@ const NSInteger COUNT = 5;
         NSLog(@" G A M E   O V E R");
         NSLog(@"===================");
     }
+}
+
+- (void)holdAllDice {
+    [self resetDice];
+    [_heldDice addObjectsFromArray:_dice];
+}
+
+- (void)randomizeUnheldDice {
+    for (Dice *die in _dice)
+        if (![_heldDice containsObject:die]) [die randomizeValue];
+}
+
+- (NSInteger)getCurrentScore {
+    NSInteger curScore = 0;
+    for (Dice *die in _heldDice)
+        curScore += die.value;
+    return curScore;
 }
 
 @end
