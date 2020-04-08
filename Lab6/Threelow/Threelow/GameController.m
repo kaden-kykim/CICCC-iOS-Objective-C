@@ -23,25 +23,38 @@
 }
 
 - (void)holdDice:(NSInteger)number {
-    [self.dice[number - 1] toggleHeldStatus];
+    [_dice[number - 1] toggleHeldStatus];
 }
 
 - (void)resetDice {
-    for (Dice *die in self.dice)
+    for (Dice *die in _dice)
         die.isHeld = false;
 }
 
 - (void)randomizeUnheldDice {
-    for (Dice *die in self.dice)
+    for (Dice *die in _dice)
         if (!die.isHeld)
             [die randomizeValue];
 }
 
+- (NSInteger)getCurrentScore {
+    NSInteger curScore = 0;
+    for (Dice *die in _dice)
+        if (die.isHeld) curScore += die.value;
+    return curScore;
+}
+
 - (void)printAllDice {
+    NSLog(@"===================");
+    NSLog(@"-- Current  Dice --");
     NSString *printStr = @"";
-    for (Dice *die in self.dice)
-        printStr = [printStr stringByAppendingFormat:(die.isHeld) ? @"[%@] " : @" %@  ", [die getUniValue]];
+    for (Dice *die in _dice)
+        printStr = [printStr stringByAppendingFormat:@"%@ ", [die getUniValue]];
     NSLog(@"%@", printStr);
+    NSLog(@"");
+    NSLog(@"--  Total Score  --");
+    NSLog(@"    Score : %ld", [self getCurrentScore]);
+    NSLog(@"===================");
 }
 
 @end

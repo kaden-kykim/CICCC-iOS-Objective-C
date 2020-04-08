@@ -14,23 +14,28 @@
 {
     self = [super init];
     if (self) {
+        _value = [Dice generateRandomNumber];
         _isHeld = false;
     }
     return self;
 }
 
++ (NSInteger)generateRandomNumber {
+    return arc4random_uniform(6) + 1;
+}
+
 - (void)randomizeValue {
-    self.value = arc4random_uniform(5) + 1;
+    self.value = [Dice generateRandomNumber];
 }
 
 - (NSString *)getUniValue {
     switch (self.value) {
-        case 1: return @"⚀";
-        case 2: return @"⚁";
-        case 3: return @"⚂";
-        case 4: return @"⚃";
-        case 5: return @"⚄";
-        case 6: return @"⚅";
+        case 1: return (_isHeld) ? @"[⚀]" : @" ⚀ ";
+        case 2: return (_isHeld) ? @"[⚁]" : @" ⚁ ";
+        case 3: return (_isHeld) ? @"[⚂]" : @" ⚂ ";
+        case 4: return (_isHeld) ? @"[⚃]" : @" ⚃ ";
+        case 5: return (_isHeld) ? @"[⚄]" : @" ⚄ ";
+        case 6: return (_isHeld) ? @"[⚅]" : @" ⚅ ";
         default: return @"";
     }
 }
