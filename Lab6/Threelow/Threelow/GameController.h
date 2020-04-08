@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)holdDie:(NSInteger)number;
 - (void)resetDice;
 - (void)randomizeUnheldDice;
+- (BOOL)isGameOver;
 - (void)printAllDice;
 
 @end

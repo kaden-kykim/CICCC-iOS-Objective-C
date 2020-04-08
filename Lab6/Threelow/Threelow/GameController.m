@@ -15,7 +15,7 @@ const NSInteger COUNT = 5;
 @property (nonatomic, readonly, strong) NSArray *dice;
 @property (nonatomic, strong) NSSet *compHeldDice;
 @property (nonatomic, strong) NSMutableSet *heldDice;
-@property (nonatomic, assign) NSInteger remainingRolls;
+@property (nonatomic, assign) NSInteger remainingRolls, scoreToBeat;
 
 @end
 
@@ -31,6 +31,7 @@ const NSInteger COUNT = 5;
         _dice = tmpDice;
         _heldDice = [NSMutableSet new];
         _remainingRolls = COUNT;
+        _scoreToBeat = 6 * COUNT;
     }
     return self;
 }
@@ -48,7 +49,9 @@ const NSInteger COUNT = 5;
 }
 
 - (void)resetDice {
-    [_heldDice removeAllObjects];
+    if (_remainingRolls > 0) {
+        [_heldDice removeAllObjects];
+    }
 }
 
 - (void)randomizeUnheldDice {
@@ -65,9 +68,20 @@ const NSInteger COUNT = 5;
             _compHeldDice = [_heldDice copy];
         }
     }
-    if (_remainingRolls == 0) {
-        [self holdAllDice];
-        _remainingRolls--;
+    if (_remainingRolls == 0) [self endGame];
+}
+
+- (BOOL)isGameOver {
+    return (_remainingRolls <= 0);
+}
+
+- (void)endGame {
+    [self holdAllDice];
+    _remainingRolls = -1;
+    
+    if ([self getCurrentScore] < _scoreToBeat) {
+        _scoreToBeat = [self getCurrentScore];
+        NSLog(@"!!! New  Record !!!");
     }
 }
 
@@ -87,9 +101,10 @@ const NSInteger COUNT = 5;
     NSLog(@"%@", printStr);
     NSLog(@"");
     NSLog(@"--  Total Score  --");
-    NSLog(@"    Score : %ld", [self getCurrentScore]);
+    NSLog(@"    Score : %2ld", [self getCurrentScore]);
     NSLog(@"===================");
-    NSLog(@"Remaining Rolls : %ld", MAX(_remainingRolls, 0));
+    NSLog(@"Remaining Rolls:  %ld", MAX(_remainingRolls, 0));
+    NSLog(@"Score To Beat  : %2ld", _scoreToBeat);
     NSLog(@"===================");
     if (_remainingRolls <= 0) {
         NSLog(@" G A M E   O V E R");

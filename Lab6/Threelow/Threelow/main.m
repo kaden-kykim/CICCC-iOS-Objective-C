@@ -33,20 +33,32 @@ int main(int argc, const char * argv[]) {
         while (YES) {
             NSString *opt = getUserInput(NULL);
             if ([opt isEqualToString:@"roll"]) {
-                [gameCtrl randomizeUnheldDice];
-                [gameCtrl printAllDice];
+                if (![gameCtrl isGameOver]) {
+                    [gameCtrl randomizeUnheldDice];
+                    [gameCtrl printAllDice];
+                } else {
+                    NSLog(@"The game is over");
+                }
             } else if ([opt isEqualToString:@"hold"]) {
-                NSNumber *holdNum = [[NSNumberFormatter new] numberFromString:getUserInput(@"Enter the number of the die:")];
-                if (holdNum != nil) {
-                    NSInteger holdOpt = [holdNum integerValue];
-                    if (holdOpt >= 1 && holdOpt <= 6) {
-                        [gameCtrl holdDie:holdOpt];
-                        [gameCtrl printAllDice];
+                if (![gameCtrl isGameOver]) {
+                    NSNumber *holdNum = [[NSNumberFormatter new] numberFromString:getUserInput(@"Enter the number of the die:")];
+                    if (holdNum != nil) {
+                        NSInteger holdOpt = [holdNum integerValue];
+                        if (holdOpt >= 1 && holdOpt <= 6) {
+                            [gameCtrl holdDie:holdOpt];
+                            [gameCtrl printAllDice];
+                        }
                     }
+                } else {
+                    NSLog(@"The game is over");
                 }
             } else if ([opt isEqualToString:@"reset"]) {
-                [gameCtrl resetDice];
-                [gameCtrl printAllDice];
+                if (![gameCtrl isGameOver]) {
+                    [gameCtrl resetDice];
+                    [gameCtrl printAllDice];
+                } else {
+                    NSLog(@"The game is over");
+                }
             } else if ([opt isEqualToString:@"disp"]) {
                 [gameCtrl printAllDice];
             } else if ([opt isEqualToString:@"done"]) {
