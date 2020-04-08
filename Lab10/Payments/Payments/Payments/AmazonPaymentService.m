@@ -10,4 +10,8 @@
 
 @implementation AmazonPaymentService
 
+- (void)processPaymentAmount:(NSInteger)amount {
+    
+}
+
 @end

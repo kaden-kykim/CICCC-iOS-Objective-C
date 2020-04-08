@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol PaymentDelegate <NSObject>
 
+@required
 - (void)processPaymentAmount:(NSInteger)amount;
 
 @end

@@ -10,4 +10,8 @@
 
 @implementation PaypalPaymentService
 
+- (void)processPaymentAmount:(NSInteger)amount {
+    
+}
+
 @end
