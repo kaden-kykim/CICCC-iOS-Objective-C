@@ -9,18 +9,35 @@
 #import <Foundation/Foundation.h>
 
 #import "Kitchen.h"
+#import "NoAnchovyManager.h"
+#import "CheeryManager.h"
 
 int main(int argc, const char * argv[])
 {
-
     @autoreleasepool {
-        
         NSLog(@"Please pick your pizza size and toppings:");
         
         Kitchen *restaurantKitchen = [Kitchen new];
+        NoAnchovyManager *noAnchovyManager = [NoAnchovyManager new];
+        CheeryManager *cheeryManager = [CheeryManager new];
+        NSInteger count = 0;
         
         while (TRUE) {
             // Loop forever
+            switch (count++ % 3) {
+                case 0:
+                    restaurantKitchen.delegate = noAnchovyManager;
+                    NSLog(@"Manager: No Anchovies");
+                    break;
+                case 1:
+                    restaurantKitchen.delegate = cheeryManager;
+                    NSLog(@"Manager: Cheery");
+                    break;
+                default:
+                    restaurantKitchen.delegate = nil;
+                    NSLog(@"Manager: None");
+                    break;
+            }
             
             NSLog(@"> ");
             char str[100];
@@ -38,7 +55,6 @@ int main(int argc, const char * argv[])
             Pizza *orderedPizza = [restaurantKitchen makePizza:commandWords];
             NSLog(@"Pizza size: %ld, topping: %@", orderedPizza.size, orderedPizza.toppings);
         }
-
     }
     return 0;
 }

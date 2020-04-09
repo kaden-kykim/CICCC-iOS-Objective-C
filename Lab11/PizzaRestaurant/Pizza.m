@@ -14,23 +14,17 @@
 {
     self = [super init];
     if (self) {
-        _size = size;
-        _toppings = toppings;
+        if (size == UNDEFINED && ![@[@"pepperoni", @"meatlovers"] containsObject:toppings[0]])
+            return NULL;
+        
+        _size = (size != UNDEFINED) ? size : LARGE;
+        if ([toppings[0] isEqualToString:@"meatlovers"]) {
+            _toppings = @[@"ham", @"bacon", @"sausage", @"pepperoni"];
+        } else {
+            _toppings = toppings;
+        }
     }
     return self;
-}
-
-+ (Pizza *)pepperoniWithSize:(PizzaSize)size {
-    if (size == UNDEFINED) {
-        size = LARGE;
-    }
-    return [[self alloc] initWithSize:size AndToppings:@[@"pepperoni"]];
-}
-+ (Pizza *)meatLoversWithSize:(PizzaSize)size {
-    if (size == UNDEFINED) {
-        size = LARGE;
-    }
-    return [[self alloc] initWithSize:size AndToppings:@[@"ham", @"bacon", @"sausage", @"pepperoni"]];
 }
 
 + (PizzaSize)sizeFromString:(NSString *)sizeString {
@@ -43,6 +37,15 @@
         return LARGE;
     }
     return UNDEFINED;
+}
+
++ (NSString *)sizeToString:(PizzaSize)size {
+    switch (size) {
+        case SMALL: return @"small";
+        case MEDIUM: return @"medium";
+        case LARGE: return @"large";
+        default: return @"";
+    }
 }
 
 @end

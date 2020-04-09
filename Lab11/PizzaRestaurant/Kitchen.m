@@ -12,18 +12,22 @@
 
 - (Pizza *)makePizza:(NSArray *)commandWords {
     PizzaSize size = [Pizza sizeFromString:commandWords[0]];
+    NSMutableArray *toppings = [NSMutableArray new];
     if (size == UNDEFINED) {
-        if ([commandWords count] != 1) {
+        if ([commandWords count] != 1)
             size = [Pizza sizeFromString:commandWords[1]];
-        }
-        NSString *pizzaMenu = [commandWords[0] lowercaseString];
-        if ([pizzaMenu isEqualToString:@"pepperoni"]) {
-            return [Pizza pepperoniWithSize:size];
-        } else if ([pizzaMenu isEqualToString:@"meatlovers"]) {
-            return [Pizza meatLoversWithSize:size];
-        }
+        [toppings addObject:[commandWords[0] lowercaseString]];
     } else {
-        return [self makePizzaWithSize:size toppings:[commandWords subarrayWithRange:NSMakeRange(1, [commandWords count] - 1)]];
+        if ([_delegate kitchenShouldUpgradeOrder:self])
+            size = MIN(size + 1, LARGE);
+        [toppings addObjectsFromArray:[commandWords subarrayWithRange:NSMakeRange(1, [commandWords count] - 1)]];
+    }
+
+    if ([_delegate kitchen:self shouldMakePizzaOfSize:size andTopping:[commandWords subarrayWithRange:NSMakeRange(1, [commandWords count] - 1)]]) {
+        Pizza *pizza = [self makePizzaWithSize:size toppings:toppings];
+        if ([_delegate respondsToSelector:@selector(kitchenDidMakePizza:)])
+            [_delegate kitchenDidMakePizza:pizza];
+        return pizza;
     }
     return NULL;
 }
