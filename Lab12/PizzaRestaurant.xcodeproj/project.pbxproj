@@ -43,6 +43,7 @@
 		6F6E80AD243EFE77004C7D7B /* DeliveryCar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryCar.m; sourceTree = "<group>"; };
 		6F6E80AF243F00F5004C7D7B /* Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manager.m; sourceTree = "<group>"; };
 		6F6E80B0243F00F5004C7D7B /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
+		6F6E80B7243FD9C7004C7D7B /* KitchenDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitchenDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,7 @@
 				6F1EC3FD24317C89003B5F0E /* Pizza.m */,
 				6F6E80B0243F00F5004C7D7B /* Manager.h */,
 				6F6E80AF243F00F5004C7D7B /* Manager.m */,
+				6F6E80B7243FD9C7004C7D7B /* KitchenDelegate.h */,
 			);
 			path = PizzaRestaurant;
 			sourceTree = "<group>";
