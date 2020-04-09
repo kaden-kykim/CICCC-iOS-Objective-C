@@ -40,6 +40,7 @@
 		6F6E80A2243EF2BA004C7D7B /* NoAnchovyManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoAnchovyManager.m; sourceTree = "<group>"; };
 		6F6E80A4243EF4B8004C7D7B /* CheeryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheeryManager.h; sourceTree = "<group>"; };
 		6F6E80A5243EF4B8004C7D7B /* CheeryManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheeryManager.m; sourceTree = "<group>"; };
+		6F6E80B2243FD266004C7D7B /* KitchenDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitchenDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +93,7 @@
 				6F6E80A2243EF2BA004C7D7B /* NoAnchovyManager.m */,
 				6F6E80A4243EF4B8004C7D7B /* CheeryManager.h */,
 				6F6E80A5243EF4B8004C7D7B /* CheeryManager.m */,
+				6F6E80B2243FD266004C7D7B /* KitchenDelegate.h */,
 			);
 			path = PizzaRestaurant;
 			sourceTree = "<group>";
